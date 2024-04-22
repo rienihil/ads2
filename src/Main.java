@@ -7,7 +7,14 @@ public class Main {
         arr.add(3);
         arr.add(4);
         arr.add(5);
-        arr.addFirst(8);
-        System.out.println(arr.get(1));
+        System.out.println("size: "+ arr.size());
+        arr.print();
+        arr.addFirst(-1);
+        arr.addLast(6);
+        arr.set(1,6);
+        arr.add(10,1);
+        arr.remove(2);
+        System.out.println("size: "+ arr.size());
+        arr.print();
     }
 }

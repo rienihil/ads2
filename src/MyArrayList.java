@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class MyArrayList<T> implements MyList<T> {
@@ -11,10 +12,11 @@ public class MyArrayList<T> implements MyList<T> {
     // adds element to the end
     @Override
     public void add(T item) {
+        size++;
         if(size>=arr.length){
             increaseBuffer();
         }
-        arr[size++] = (T) item;
+        arr[size-1] = (T) item;
     }
 
     // increases space for elements
@@ -24,41 +26,54 @@ public class MyArrayList<T> implements MyList<T> {
         arr=newArr;
     }
 
+    //throws exception if index is wrong
     private void checkIndex(int index){
         if (index < 0 || index >= size){
             throw new IndexOutOfBoundsException("index not correct");
         }
     }
 
+    // changes value at the index
     @Override
     public void set(T item, int index) {
         checkIndex(index);
         arr[index]=item;
     }
 
+    // adds element in any place
     @Override
     public void add(T item, int index) {
-        for(int i = index+1; i<size-1; i++){
-            arr[i+1]=arr[i];
+        size++;
+        if(size>=arr.length){
+            increaseBuffer();
         }
-        add(item, index);
+        for (int i=size-1; i>index; i--){
+            arr[i]=arr[i-1];
+        }
+        set(item, index);
     }
 
+    // adds element to the beginning
     @Override
     public void addFirst(T item) {
         size++;
         if(size>=arr.length){
             increaseBuffer();
         }
-        for (int i=0; i<size; i++){
+        for (int i=size-1; i>0; i--){
             arr[i]=arr[i-1];
         }
         set(item, 0);
     }
 
+    // adds element to the end
     @Override
     public void addLast(T item) {
-
+        size++;
+        if(size>=arr.length){
+            increaseBuffer();
+        }
+        arr[size-1]=item;
     }
 
     @Override
@@ -68,27 +83,34 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public T getFirst() {
-        return null;
+        return arr[0];
     }
 
     @Override
     public T getLast() {
-        return null;
+        return arr[size-1];
     }
 
     @Override
     public void remove(int index) {
-
+        for (int i=index; i<size; i++){
+            arr[i]=arr[i+1];
+        }
+        removeLast();
     }
 
     @Override
     public void removeFirst() {
-
+        for (int i=0; i<size; i++){
+            arr[i]=arr[i+1];
+        }
+        removeLast();
     }
 
     @Override
     public void removeLast() {
-
+        arr[size-1]=null;
+        size--;
     }
 
     @Override
@@ -98,12 +120,26 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public int indexOf(Object object) {
-        return 0;
+        int res=-1;
+        for (int i=0; i<size; i++){
+            if (arr[i]==object){
+                res=i;
+                break;
+            }
+        }
+        return res;
     }
 
     @Override
     public int lastIndexOf(Object object) {
-        return 0;
+        int res=-1;
+        for (int i=size-1; i>0; i--){
+            if (arr[i]==object){
+                res=i;
+                break;
+            }
+        }
+        return res;
     }
 
     @Override
@@ -118,16 +154,24 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public void clear() {
-
+        arr = (T[]) new Object[5];
+        size=0;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public Iterator<T> iterator() {
         return null;
+    }
+
+    public void print(){
+        for (int i=0; i<size-1; i++){
+            System.out.print(arr[i]+", ");
+        }
+        System.out.print(arr[size-1]+"\n");
     }
 }
