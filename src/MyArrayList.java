@@ -66,16 +66,6 @@ public class MyArrayList<T> implements MyList<T> {
         set(item, 0);
     }
 
-    // adds element to the end
-    @Override
-    public void addLast(T item) {
-        size++;
-        if(size>=arr.length){
-            increaseBuffer();
-        }
-        arr[size-1]=item;
-    }
-
     @Override
     public T get(int index) {
         return arr[index];
@@ -93,6 +83,7 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public void remove(int index) {
+        checkIndex(index);
         for (int i=index; i<size; i++){
             arr[i]=arr[i+1];
         }
@@ -169,9 +160,9 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     public void print(){
-        for (int i=0; i<size-1; i++){
-            System.out.print(arr[i]+", ");
+        for (int i = 0; i < size; i++) {
+            System.out.print(arr[i] + " ");
         }
-        System.out.print(arr[size-1]+"\n");
+        System.out.print('\n');
     }
 }

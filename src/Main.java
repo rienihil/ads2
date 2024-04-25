@@ -7,14 +7,25 @@ public class Main {
         arr.add(3);
         arr.add(4);
         arr.add(5);
-        System.out.println("size: "+ arr.size());
         arr.print();
         arr.addFirst(-1);
-        arr.addLast(6);
         arr.set(1,6);
         arr.add(10,1);
         arr.remove(2);
-        System.out.println("size: "+ arr.size());
         arr.print();
+
+        MyLinkedList<Integer> linked = new MyLinkedList<>();
+        linked.add(0);
+        linked.add(1);
+        linked.add(2);
+        linked.add(3);
+        linked.add(4);
+        linked.add(5);
+        linked.print();
+        System.out.println(linked.getLast());
+        System.out.println(linked.get(2));
+        linked.addFirst(-1);
+        linked.add(10,3);
+        linked.print();
     }
 }
