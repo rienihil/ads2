@@ -135,12 +135,17 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public boolean exists(Object object) {
+        for (int i = 0; i<size; i++){
+            if (arr[i]==object){
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return arr;
     }
 
     @Override

@@ -118,17 +118,30 @@ public class MyLinkedList<T> implements MyList<T>{
 
     @Override
     public void remove(int index) {
-
+        checkIndex(index);
+        if (index==0){
+            removeFirst();
+        }
+        else if (index==size-1){
+            removeLast();
+        }
+        else{
+            getNode(index+1).prev=getNode(index-1);
+            getNode(index-1).next=getNode(index+1);
+        }
+        size--;
     }
 
     @Override
     public void removeFirst() {
-
+        head=head.next;
+        size--;
     }
 
     @Override
     public void removeLast() {
-
+        tail=tail.prev;
+        size--;
     }
 
     @Override
@@ -138,22 +151,51 @@ public class MyLinkedList<T> implements MyList<T>{
 
     @Override
     public int indexOf(Object object) {
-        return 0;
+        MyNode<T> current = head;
+        int i=0;
+        while (current!=null){
+            if (current.item==(T)object){
+                return i;
+            }
+            i++;
+            current=current.next;
+        }
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object object) {
-        return 0;
+        MyNode<T> current = tail;
+        int i = size-1;
+        while (current!=null){
+            if (current.item==object){
+                return i;
+            }
+            i--;
+            current=current.prev;
+        }
+        return -1;
     }
 
     @Override
     public boolean exists(Object object) {
+        MyNode<T> current = head;
+        while (current!=null){
+            if (current.item==object){
+                return true;
+            }
+            current=current.next;
+        }
         return false;
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        T[] arr = (T[]) new Object[size];
+        for (int i=0; i<size; i++){
+            arr[i]=get(i);
+        }
+        return arr;
     }
 
     @Override
@@ -176,6 +218,14 @@ public class MyLinkedList<T> implements MyList<T>{
         while (current != null) {
             System.out.print(current.item + " ");
             current = current.next;
+        }
+        System.out.print('\n');
+    }
+    public void printBack() {
+        MyNode<T> current = tail;
+        while (current != null) {
+            System.out.print(current.item + " ");
+            current = current.prev;
         }
         System.out.print('\n');
     }

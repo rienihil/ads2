@@ -13,6 +13,7 @@ public class Main {
         arr.add(10,1);
         arr.remove(2);
         arr.print();
+        System.out.println(arr.toArray()[0]+"\n");
 
         MyLinkedList<Integer> linked = new MyLinkedList<>();
         linked.add(0);
@@ -25,7 +26,12 @@ public class Main {
         System.out.println(linked.getLast());
         System.out.println(linked.get(2));
         linked.addFirst(-1);
-        linked.add(10,3);
+        linked.add(4,3);
         linked.print();
+        linked.remove(1);
+        linked.print();
+        System.out.println(linked.indexOf(4) + " " + linked.lastIndexOf(4));
+        System.out.println(linked.exists(1) + " " + linked.exists(12));
+        System.out.println(linked.toArray()[0]);
     }
 }
