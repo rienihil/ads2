@@ -200,7 +200,9 @@ public class MyLinkedList<T> implements MyList<T>{
 
     @Override
     public void clear() {
-
+        head=null;
+        tail=null;
+        size=0;
     }
 
     @Override
@@ -218,14 +220,6 @@ public class MyLinkedList<T> implements MyList<T>{
         while (current != null) {
             System.out.print(current.item + " ");
             current = current.next;
-        }
-        System.out.print('\n');
-    }
-    public void printBack() {
-        MyNode<T> current = tail;
-        while (current != null) {
-            System.out.print(current.item + " ");
-            current = current.prev;
         }
         System.out.print('\n');
     }
