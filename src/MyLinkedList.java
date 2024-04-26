@@ -229,7 +229,27 @@ public class MyLinkedList<T> implements MyList<T>{
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new LinkedListIterator();
+    }
+
+    private class LinkedListIterator implements Iterator<T> {
+        private MyNode<T> current;
+
+        public LinkedListIterator() {
+            current = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            T item = current.item;
+            current = current.next;
+            return item;
+        }
     }
 
     public void print() {

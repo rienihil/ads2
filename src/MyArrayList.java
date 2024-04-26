@@ -173,7 +173,21 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new ArrayListIterator();
+    }
+
+    private class ArrayListIterator implements Iterator<T> {
+        private int index;
+
+        @Override
+        public boolean hasNext() {
+            return index<size;
+        }
+
+        @Override
+        public T next() {
+            return arr[index++];
+        }
     }
 
     public void print(){

@@ -1,20 +1,29 @@
-public class MyQueue<T> extends MyLinkedList<T>{
+import java.util.Iterator;
+
+public class MyQueue<T> implements Iterable<T>{
+    private MyList<T> list;
+
     public boolean empty(){
-        return size() == 0;
+        return list.size() == 0;
     }
 
     public T enqueue(T item){
-        add(item);
+        list.add(item);
         return item;
     }
 
     public T dequeue(){
-        T first = getFirst();
-        removeFirst();
+        T first = list.getFirst();
+        list.removeFirst();
         return first;
     }
 
     public T peek(){
-        return getFirst();
+        return list.getFirst();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return list.iterator();
     }
 }
