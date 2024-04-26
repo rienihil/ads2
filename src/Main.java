@@ -12,6 +12,7 @@ public class Main {
         arr.set(1,6);
         arr.add(10,1);
         arr.remove(2);
+        arr.sort();
         arr.print();
         System.out.println(arr.toArray()[0]+"\n");
 
@@ -32,6 +33,14 @@ public class Main {
         linked.print();
         System.out.println(linked.indexOf(4) + " " + linked.lastIndexOf(4));
         System.out.println(linked.exists(1) + " " + linked.exists(12));
-        System.out.println(linked.toArray()[0]);
+        System.out.println(linked.toArray()[0]+"\n");
+
+        MyQueue<Integer> queue = new MyQueue<Integer>();
+        queue.enqueue(0);
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+        System.out.println(queue.size());
+        System.out.println(queue.peek());
     }
 }

@@ -126,6 +126,7 @@ public class MyLinkedList<T> implements MyList<T>{
             removeLast();
         }
         else{
+            // changing pointers to skip the removed link
             getNode(index+1).prev=getNode(index-1);
             getNode(index-1).next=getNode(index+1);
         }
@@ -146,15 +147,31 @@ public class MyLinkedList<T> implements MyList<T>{
 
     @Override
     public void sort() {
-
+        // selection sort algorithm
+        for (int i = 0; i < size - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < size; j++) {
+                if (compareTo(get(j), get(minIndex)) < 0) {
+                    minIndex = j;
+                }
+            }
+            T temp = get(minIndex);
+            remove(minIndex);
+            add(temp,i);
+        }
     }
+
+    private int compareTo(T a, T b) {
+        return ((Comparable<T>) a).compareTo(b);
+    }
+
 
     @Override
     public int indexOf(Object object) {
         MyNode<T> current = head;
         int i=0;
         while (current!=null){
-            if (current.item==(T)object){
+            if (current.item==object){
                 return i;
             }
             i++;

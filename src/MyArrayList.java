@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Iterator;
 
 public class MyArrayList<T> implements MyList<T> {
@@ -16,7 +15,7 @@ public class MyArrayList<T> implements MyList<T> {
         if(size>=arr.length){
             increaseBuffer();
         }
-        arr[size-1] = (T) item;
+        arr[size-1] = item;
     }
 
     // increases space for elements
@@ -106,7 +105,20 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public void sort() {
+        //bubble sort algorithm
+        for (int i=0; i<size-1; i++){
+            for (int j=0; j<size-i-1; j++){
+                if (compareTo(arr[i],arr[i+1])>0){
+                    T temp = arr[i];
+                    arr[i]=arr[i+1];
+                    arr[i+1]=temp;
+                }
+            }
+        }
+    }
 
+    private int compareTo(T a, T b) {
+        return ((Comparable<T>) a).compareTo(b);
     }
 
     @Override
