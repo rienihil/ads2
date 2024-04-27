@@ -1,7 +1,7 @@
 import java.util.Iterator;
 
 public class MyStack<T> implements Iterable<T>{
-    private MyList<T> list;
+    private MyArrayList<T> list;
 
     public boolean empty(){
         return list.size()==0;
