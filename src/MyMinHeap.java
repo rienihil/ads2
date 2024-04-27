@@ -45,7 +45,7 @@ public class MyMinHeap<T extends Comparable<T>> implements Iterable<T> {
     }
 
     public T getMin() {
-        if (empty()) {
+        if (list.size() == 0) {
             throw new IllegalStateException("Heap is empty");
         }
         return list.get(0);
