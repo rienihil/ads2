@@ -48,7 +48,10 @@ public class MyLinkedList<T> implements MyList<T>{
         checkIndex(index);
         MyNode<T> node = new MyNode<>(item);
         if (index==0){
-            addFirst(item);
+            node.next=head;
+            head.prev=node;
+            head=node;
+            size++;
         }
         else if (index==size-1){
             add(item);
@@ -64,11 +67,12 @@ public class MyLinkedList<T> implements MyList<T>{
 
     @Override
     public void addFirst(T item) {
-        MyNode<T> node = new MyNode<>(item);
-        node.next=head;
-        head.prev=node;
-        head=node;
-        size++;
+        add(item,0);
+    }
+
+    @Override
+    public void addLast(T item){
+        add(item);
     }
 
     private void checkIndex(int index){
@@ -108,22 +112,22 @@ public class MyLinkedList<T> implements MyList<T>{
 
     @Override
     public T getFirst() {
-        return head.item;
+        return get(0);
     }
 
     @Override
     public T getLast() {
-        return tail.item;
+        return get(size-1);
     }
 
     @Override
     public void remove(int index) {
         checkIndex(index);
         if (index==0){
-            removeFirst();
+            head=head.next;
         }
         else if (index==size-1){
-            removeLast();
+            tail=tail.prev;
         }
         else{
             // changing pointers to skip the removed link
@@ -135,19 +139,20 @@ public class MyLinkedList<T> implements MyList<T>{
 
     @Override
     public void removeFirst() {
-        head=head.next;
-        size--;
+        remove(0);
     }
 
     @Override
     public void removeLast() {
-        tail=tail.prev;
-        size--;
+        remove(size-1);
     }
 
     @Override
     public void sort() {
-        // selection sort algorithm
+        selectionSort();
+    }
+
+    private void selectionSort(){
         for (int i = 0; i < size - 1; i++) {
             int minIndex = i;
             for (int j = i + 1; j < size; j++) {

@@ -18,7 +18,7 @@ public class MyArrayList<T> implements MyList<T> {
         arr[size-1] = item;
     }
 
-    // increases space for elements
+    // increases size of the array
     private void increaseBuffer(){
         T[] newArr = (T[]) new Object[arr.length*2];
         System.arraycopy(arr, 0, newArr, 0, arr.length);
@@ -55,14 +55,12 @@ public class MyArrayList<T> implements MyList<T> {
     // adds element to the beginning
     @Override
     public void addFirst(T item) {
-        size++;
-        if(size>=arr.length){
-            increaseBuffer();
-        }
-        for (int i=size-1; i>0; i--){
-            arr[i]=arr[i-1];
-        }
-        set(item, 0);
+        add(item,0);
+    }
+
+    @Override
+    public void addLast(T item){
+        add(item);
     }
 
     @Override
@@ -72,12 +70,12 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public T getFirst() {
-        return arr[0];
+        return get(0);
     }
 
     @Override
     public T getLast() {
-        return arr[size-1];
+        return get(size-1);
     }
 
     @Override
@@ -86,26 +84,26 @@ public class MyArrayList<T> implements MyList<T> {
         for (int i=index; i<size; i++){
             arr[i]=arr[i+1];
         }
-        removeLast();
-    }
-
-    @Override
-    public void removeFirst() {
-        for (int i=0; i<size; i++){
-            arr[i]=arr[i+1];
-        }
-        removeLast();
-    }
-
-    @Override
-    public void removeLast() {
         arr[size-1]=null;
         size--;
     }
 
     @Override
+    public void removeFirst() {
+        remove(0);
+    }
+
+    @Override
+    public void removeLast() {
+        remove(size-1);
+    }
+
+    @Override
     public void sort() {
-        //bubble sort algorithm
+        bubbleSort();
+    }
+
+    private void bubbleSort(){
         for (int i=0; i<size-1; i++){
             for (int j=0; j<size-i-1; j++){
                 if (compareTo(arr[i],arr[i+1])>0){
